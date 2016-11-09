@@ -9,7 +9,7 @@ init()
 import declaredb
 from declaredb import Items,Logs,Base
 
-def additem(item_name,description,available_num,price):
+def additem():
 
 	# Create an engine that stores data in the local directory
 	engine = create_engine('sqlite:///inventory.db')
@@ -19,6 +19,10 @@ def additem(item_name,description,available_num,price):
 
 	#Bind engine to Base Metadata
 	Base.metadata.bind=engine
+	item_name=input("Enter Item name: ")
+	description=input("Enter a description for %s: "%(item_name))
+	available_num=input("Enter the number of %s: "%(item_name))
+	price=input("Enter the unit price of %s: "%(item_name))
 
 	#creates session
 	cur_session=sessionmaker(bind=engine)
