@@ -20,25 +20,47 @@ def additem():
 	#Bind engine to Base Metadata
 	Base.metadata.bind=engine
 	item_name=input("Enter Item name: ")
-	description=input("Enter a description for %s: "%(item_name))
-	available_num=input("Enter the number of %s: "%(item_name))
-	price=input("Enter the unit price of %s: "%(item_name))
 
-	#creates session
-	cur_session=sessionmaker(bind=engine)
-	session=cur_session()
-
-	#Statement to insert items to table
-	new_item=Items(itemname=item_name,description=description,available_amount=available_num,price=price,date_added=datetime.date.today(),status=1)
+	if len(item_name)>0:#Ensures that data is added as item name
 	
-	#executes statement
-	session.add(new_item)
-	session.commit()
+		description=input("Enter a description for %s: "%(item_name))
+		available_num=int(input("Enter the number of %s: "%(item_name)))
+		price=int (input("Enter the unit price of %s: "%(item_name)))
 
-	#Feedback when successfull
-	click.echo(Fore.GREEN+ "*********************")
-	click.echo(Fore.RED+ "Item successfully added")
-	click.echo(Fore.GREEN+ "*********************")
+		if isinstance(available_num,int) and isinstance(price,int):#Ensures that the available_num and price are integers
+		
+			if len(description)!=0 and available_num!=None and price!=None:#Esures that the three variables are not empty
+
+				#creates session
+				cur_session=sessionmaker(bind=engine)
+				session=cur_session()
+
+				#Statement to insert items to table
+				new_item=Items(itemname=item_name,description=description,available_amount=available_num,price=price,date_added=datetime.date.today(),status=1)
+				
+				#executes statement
+				session.add(new_item)
+				session.commit()
+
+				#Feedback when successfull
+				click.echo(Fore.GREEN+ "*********************")
+				click.echo(Fore.RED+ "Item successfully added")
+				click.echo(Fore.GREEN+ "*********************")
+
+			else:
+				click.echo(Fore.GREEN+ "*********************************")
+				click.echo(Fore.RED+ "All items have to be filled")
+		else:
+			click.echo(Fore.GREEN+ "*********************************")
+			click.echo(Fore.RED+ "Invalid types")
+					
+
+	else:
+		click.echo(Fore.GREEN+ "***********************************")
+		click.echo(Fore.RED+ "Item name cannot be blank")
+
+
+
 
 
 
