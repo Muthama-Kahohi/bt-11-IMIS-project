@@ -10,7 +10,6 @@ import declaredb
 from declaredb import Items,Logs,Base
 from tabulate import tabulate
 
-@click.command()
 def listitems():
 	#create engine
 	engine = create_engine('sqlite:///inventory.db')
