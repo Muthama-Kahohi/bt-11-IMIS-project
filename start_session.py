@@ -22,6 +22,10 @@ from pyfiglet import Figlet
 from declaredb import Items,Logs,Base
 from additems import additem
 from listitems import listitems
+from removeitems import remove
+from checkin import check_in
+from checkout import check_out
+from view import view
 
 
 def docopt_cmd(func):
@@ -134,14 +138,43 @@ class ImisInteract (cmd.Cmd):
     def do_list(self, arg):
         """Usage: list 
         """
-
         listitems()
+
+    @docopt_cmd
+    def do_remove(self, arg):
+        """Usage: remove <item_id> [--timeout=<seconds>]
+        """
+        itemid=arg['<item_id>']
+        remove(int(itemid))  
+
+    @docopt_cmd
+    def do_checkin(self, arg):
+        """Usage: checkin <item_id> [--timeout=<seconds>]
+        """
+        itemid=arg['<item_id>']
+        check_in(int(itemid))
+
+    @docopt_cmd
+    def do_checkout(self, arg):
+        """Usage: checkout <item_id> [--timeout=<seconds>]
+        """
+        itemid=arg['<item_id>']
+        check_out(int(itemid))
+
+    @docopt_cmd
+    def do_view(self, arg):
+        """Usage: view <item_id> [--timeout=<seconds>]
+        """
+        itemid=arg['<item_id>']
+        view(int(itemid))              
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
 
         print('Good Bye!')
         exit()
+
+
 
 opt = docopt(__doc__, sys.argv[1:])
 
