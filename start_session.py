@@ -14,7 +14,9 @@ Options:
 """
 
 import sys
+import csv
 import cmd
+import sqlite3
 from docopt import docopt, DocoptExit
 from colorama import init,Fore
 init()
@@ -90,7 +92,7 @@ class ImisInteract (cmd.Cmd):
 
     #Export items
     print(Fore.WHITE + "Export list:",end=" ")
-    print(Fore.GREEN + "list --export",end=" ")
+    print(Fore.GREEN + "export",end=" ")
     print(Fore.YELLOW + "<filename>")
 
     #Checkout items
@@ -127,7 +129,7 @@ class ImisInteract (cmd.Cmd):
 
     @docopt_cmd
     def do_list(self, arg):
-        """Usage: list 
+        """Usage: list [--export] 
         """
         listitems()
 
@@ -164,7 +166,27 @@ class ImisInteract (cmd.Cmd):
         """Usage: serach <search_string> [--timeout=<seconds>]
         """
         search_string=arg['<search_string>']
-        search(search_string)                 
+        search(search_string) 
+
+    @docopt_cmd
+    def do_export(self, args):
+        """Usage: item_export <file_name>"""
+        print("Export")
+        print(args)
+
+        file_name = args['<file_name>']
+
+        conn = sqlite3.connect('inventory.db')
+        c = conn.cursor()
+        data = c.execute("SELECT * FROM Items")
+        with open(file_name +'.csv', 'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(['id', 'item-name','description', 'amount_available', 'price', 'date_added', 'status'])
+            writer.writerows(data)
+        conn.commit()
+        c.close()
+        conn.close()
+                            
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
