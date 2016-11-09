@@ -5,6 +5,7 @@ import datetime
 import click
 from colorama import init,Fore
 init()
+
 #import from my dbcreate module
 import declaredb
 from declaredb import Items,Logs,Base
@@ -33,9 +34,9 @@ def listitems():
 	session.close()
 
 	if len(items_list)>0:
-		print(Fore.GREEN + tabulate(items_list,tablefmt="grid",headers=["item_id","Name","Description","Amount_avail","price","date","status"]))
+		print(Fore.GREEN + tabulate(items_list,tablefmt="grid",headers=["item_id","Name","Description","Amount_avail","unit_price","date","status"]))
 	else:
-		print ("Table empty")		
+		print (Fore.YELLOW+ "Table empty")		
 	
 
 	

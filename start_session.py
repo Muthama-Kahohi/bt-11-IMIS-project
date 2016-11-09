@@ -10,7 +10,7 @@ Usage:
 Options:
     -i, --interactive  Interactive Mode
     -h, --help  Show this screen and exit.
-    --baud=<n>  Baudrate [default: 9600]
+  
 """
 
 import sys
@@ -77,11 +77,7 @@ class ImisInteract (cmd.Cmd):
 
     #Adding item details
     print(Fore.WHITE + "Add Item   :",end=" ")
-    print(Fore.GREEN + "add",end=" ")
-    print(Fore.YELLOW + "<item_name>",end=" ")
-    print(Fore.YELLOW + "<description>",end=" ")
-    print(Fore.YELLOW + "<available_num>",end=" ")
-    print(Fore.YELLOW + "<price>")
+    print(Fore.GREEN + "add")
 
     #Removing an item
     print(Fore.WHITE + "Remove Item:",end=" ")
@@ -126,15 +122,8 @@ class ImisInteract (cmd.Cmd):
 
     @docopt_cmd
     def do_add(self,arg):
-        """Usage: add <item_name> <description> <available_num> <Price> [--timeout=<seconds>]"""
-        
-        item_name = arg['<item_name>']
-        description=arg['<description>']
-        available_num=arg['<available_num>']
-        price=arg['<Price>']
-        
-
-        additem(item_name,description,int(available_num),int(price))
+        """Usage: add [--timeout=<seconds>]"""
+        additem()
 
     @docopt_cmd
     def do_list(self, arg):
@@ -179,8 +168,8 @@ class ImisInteract (cmd.Cmd):
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
-
-        print(Fore.GREEN + f.renderText('GOODBYE'))
+        f = Figlet(font='slant')
+        print(Fore.GREEN + f.renderText('Goodbye'))
 
         exit()
 
