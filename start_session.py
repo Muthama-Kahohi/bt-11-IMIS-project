@@ -26,6 +26,8 @@ from removeitems import remove
 from checkin import check_in
 from checkout import check_out
 from view import view
+from search import search
+from compute import compute
 
 
 def docopt_cmd(func):
@@ -75,7 +77,7 @@ class ImisInteract (cmd.Cmd):
 
     #Adding item details
     print(Fore.WHITE + "Add Item   :",end=" ")
-    print(Fore.GREEN + "add_item",end=" ")
+    print(Fore.GREEN + "add",end=" ")
     print(Fore.YELLOW + "<item_name>",end=" ")
     print(Fore.YELLOW + "<description>",end=" ")
     print(Fore.YELLOW + "<available_num>",end=" ")
@@ -166,13 +168,27 @@ class ImisInteract (cmd.Cmd):
         """Usage: view <item_id> [--timeout=<seconds>]
         """
         itemid=arg['<item_id>']
-        view(int(itemid))              
+        view(int(itemid)) 
+
+    @docopt_cmd
+    def do_search(self, arg):
+        """Usage: serach <search_string> [--timeout=<seconds>]
+        """
+        search_string=arg['<search_string>']
+        search(search_string)                 
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
 
-        print('Good Bye!')
+        print(Fore.GREEN + f.renderText('GOODBYE'))
+
         exit()
+
+    @docopt_cmd
+    def do_compute(self, arg):
+        """Usage: list 
+        """
+        compute()
 
 
 
