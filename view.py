@@ -28,19 +28,12 @@ def view(item_id):
 
 	try:
 		itemid=int(item_id)
+		
+		id=session.query(Items).get(itemid)		
 
-		id=session.query(Items.id)
-		id_list=[]
-		flag=False
-
-		for index in id:
-			id_list.append(list(index))
-
-		for index in id_list:
-			if itemid in index:
-				flag=True
-				break
-		if flag:		
+		id_found=id.id
+		
+		if int(id_found)==int(itemid):#ensures that item to be removed is in database		
 			item_details=session.query(Items).get(itemid)
 			log_details=select([Logs]).where(Logs.item_id==itemid)
 			result=session.execute(log_details)
@@ -50,9 +43,7 @@ def view(item_id):
 			for log in result.fetchall():
 				log_list.append(log)
 
-			session.close	
-
-
+			session.close
 
 			item_data=[item_details.id,item_details.itemname,item_details.description,item_details.available_amount,item_details.price,item_details.date_added,item_details.status]
 			details=[item_data]
@@ -65,7 +56,7 @@ def view(item_id):
 			click.echo(Fore.GREEN+"**********************************************************")
 			click.echo(Fore.RED+"No such item in database.")
 			click.echo(Fore.GREEN+"**********************************************************")	
-			
+
 	except ValueError as e:
 		click.echo(Fore.GREEN+"**********************************************************")
 		click.echo(Fore.RED+"Invalid value. Please enter a number")		

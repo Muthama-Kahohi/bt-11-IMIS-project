@@ -20,21 +20,14 @@ def remove(itemid):
 	Session = sessionmaker(bind=engine)
 	session = Session()
 	try:
-		id=session.query(Items.id)
-		id_list=[]
-		flag=False
+		id=session.query(Items).get(itemid)		
 
-		for index in id:
-			id_list.append(list(index))
+		id_found=id.id
 
-		for index in id_list:
-			if itemid in index:
-				flag=True
-				break
-
-		if flag:#ensures that item to be removed is in database	
+		if int(id_found)==int(itemid):#ensures that item to be removed is in database	
 			item_id=int(itemid)
 			#Query to delete item as per item id
+			
 			delete_this=session.query(Items).filter(Items.id == item_id).first()
 			session.delete(delete_this)
 			session.commit()
