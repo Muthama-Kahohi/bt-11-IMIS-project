@@ -16,11 +16,11 @@ Features include:
 	9.Compute assets value
 
 ##Installation:
-	1. git clone [repo](https://github.com/Muthama-Kahohi/bt-11-IMIS-project.git)
-	2. create a virtualenv `virtualenv venv`
-	3. Install requirements `pip install -r requirements`
-	4. Run command to enter `python start_session.py -i`
-	5. Follow commands
+1. git clone [repo](https://github.com/Muthama-Kahohi/bt-11-IMIS-project.git)
+2. create a virtualenv `virtualenv venv`
+3. Install requirements `pip install -r requirements`
+4. Run command to enter `python start_session.py -i`
+5. Follow commands
 
 ##Dependencies	
 
