@@ -42,4 +42,4 @@ def compute():
 	
 
 	print(Fore.GREEN + tabulate(items_list,tablefmt="grid",headers=["Item id ","Number Available","unit price"]))
-	print (Fore.RED+"TOTAL ASSET VALUE: %d"%(total))
+	print (Fore.CYAN+"TOTAL ASSET VALUE: %d"%(total))

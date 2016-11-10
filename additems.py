@@ -4,6 +4,7 @@ import datetime
 import click
 from colorama import init,Fore
 init()
+from termcolor import colored
 
 #import from my dbcreate module
 import declaredb
@@ -43,26 +44,26 @@ def additem():
 					session.commit()
 
 					#Feedback when successfull
-					click.echo(Fore.GREEN+ "*********************")
-					click.echo(Fore.RED+ "Item successfully added")
-					click.echo(Fore.GREEN+ "*********************")
+					print(Fore.GREEN+ "*********************")
+					print(Fore.RED+ "Item successfully added")
+					print(Fore.GREEN+ "*********************")
 
 				else:
-					click.echo(Fore.GREEN+ "*********************************")
-					click.echo(Fore.RED+ "All items have to be filled")
+					print(Fore.GREEN+ "*********************************")
+					print(Fore.RED+ "All items have to be filled")
 			else:
-				click.echo(Fore.GREEN+ "*********************************")
-				click.echo(Fore.RED+ "Invalid types")
+				print(Fore.GREEN+ "*********************************")
+				print(Fore.RED+ "Invalid types")
 				
 		except ValueError as e:
-			click.echo(Fore.GREEN+ "****************************************************")
-			click.echo(Fore.RED+ "Enter integers for number of items and price")
+			print(Fore.GREEN+ "****************************************************")
+			print(colored("Enter integers for number of items and price","red"))
 					
 					
 
 	else:
-		click.echo(Fore.GREEN+ "***********************************")
-		click.echo(Fore.RED+ "Item name cannot be blank")
+		print(Fore.GREEN+ "***********************************")
+		print(Fore.RED+ "Item name cannot be blank")
 
 
 

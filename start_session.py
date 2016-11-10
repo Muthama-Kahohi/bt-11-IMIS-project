@@ -124,53 +124,57 @@ class ImisInteract (cmd.Cmd):
 
     @docopt_cmd
     def do_add(self,arg):
-        """Usage: add """
+        """Usage: add"""
         additem()
 
     @docopt_cmd
-    def do_list(self, arg):
-        """Usage: list [--export] 
+    def do_list(self,arg):
+        """Usage: list 
         """
         listitems()
 
     @docopt_cmd
     def do_remove(self, arg):
-        """Usage: remove <item_id> [--timeout=<seconds>]
+        """Usage: remove <item_id>
+
         """
         itemid=arg['<item_id>']
         remove(itemid)  
 
     @docopt_cmd
     def do_checkin(self, arg):
-        """Usage: checkin <item_id> [--timeout=<seconds>]
-        """
+        """Usage: checkin <item_id>"""
         itemid=arg['<item_id>']
         check_in(itemid)
 
     @docopt_cmd
     def do_checkout(self, arg):
-        """Usage: checkout <item_id> [--timeout=<seconds>]
+        """Usage: Checkout <item_id>
         """
         itemid=arg['<item_id>']
         check_out(itemid)
 
     @docopt_cmd
     def do_view(self, arg):
-        """Usage: view <item_id> [--timeout=<seconds>]
+        """Usage: view <item_id> 
+        
         """
         itemid=arg['<item_id>']
         view(itemid)
 
     @docopt_cmd
     def do_search(self, arg):
-        """Usage: serach <search_string> [--timeout=<seconds>]
+        """Usage: search <search_string> 
+            
         """
         search_string=arg['<search_string>']
         search(search_string) 
 
     @docopt_cmd
     def do_export(self, args):
-        """Usage: item_export <file_name>"""               
+        """Usage: item_export <file_name>
+            
+        """               
 
         file_name = args['<file_name>']
 
@@ -197,7 +201,7 @@ class ImisInteract (cmd.Cmd):
 
     @docopt_cmd
     def do_assetvalue(self, arg):
-        """Usage: list 
+        """Usage: assetvalue 
         """
         compute()
 

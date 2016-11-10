@@ -1,0 +1,11 @@
+id,item-name,description,amount_available,price,date_added,status
+3,Table,Metal,1,500,2016-11-09 00:00:00.000000,0
+6,Braid,Brazilian weave,1,600,2016-11-09 00:00:00.000000,1
+8,Rolex watch,damn expensive,1,20000,2016-11-09 00:00:00.000000,1
+14,Router,gdh45dgd,1,1200,2016-11-09 00:00:00.000000,0
+15,Curtains,Cotton made from china,5,1000,2016-11-09 21:28:08.978252,1
+17,Treehouse,A tree built from a house,1,1000,2016-11-10 08:31:21.037968,1
+18,Keg,Senator keg,1,50,2016-11-10 12:29:18.823522,0
+19,Thermos,Extra hot ,1,450,2016-11-10 15:10:16.289809,1
+20,Sofa,Navy blue,2,10000,2016-11-10 15:16:09.641427,1
+21,Tshirts,Blue andela tshirts,1,250,2016-11-10 16:02:58.955525,1

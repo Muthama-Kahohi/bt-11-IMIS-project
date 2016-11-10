@@ -8,6 +8,7 @@ from sqlalchemy.sql import select,text
 import declaredb
 from declaredb import Items,Logs,Base
 import datetime
+import emoji
 
 def check_in(item_id):
 	#create engine
@@ -22,7 +23,6 @@ def check_in(item_id):
 		itemid=int(item_id)
 
 		if isinstance(itemid,int):
-
 
 			id=session.query(Items.id)
 			id_list=[]
@@ -57,10 +57,11 @@ def check_in(item_id):
 
 					click.echo(Fore.GREEN+"*********************")		
 					click.echo(Fore.YELLOW+"Item Checked in")
+
 					click.echo(Fore.GREEN+"*********************")
 			else:
 				click.echo(Fore.GREEN+"**********************************************************")
-				click.echo(Fore.RED+"No such item in database.")
+				click.echo(Fore.RED+"Item id %d not in database"%(itemid))
 				click.echo(Fore.GREEN+"**********************************************************")		
 		else:
 			click.echo(Fore.GREEN+"**********************************************************")
