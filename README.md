@@ -1,6 +1,7 @@
 # Inventory_Mgmt_System (IMIS)
 ##Introduction
 A CLI app that records, displays, searches and keeps track of assets of an organization.
+Note: python 3.x
 
 ##Features
 Features include:
@@ -35,6 +36,11 @@ Makes ANSI escape character sequences (for producing colored terminal text and c
 ###[tabulate](https://pypi.python.org/pypi/tabulate)
 Represent data in form of tables
 
-
+## Contributing
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request 
 
 
