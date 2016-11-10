@@ -9,6 +9,7 @@ import declaredb
 from declaredb import Items,Logs,Base
 import datetime
 from tabulate import tabulate
+from termcolor import colored
 
 
 def compute():
@@ -42,4 +43,4 @@ def compute():
 	
 
 	print(Fore.GREEN + tabulate(items_list,tablefmt="grid",headers=["Item id ","Number Available","unit price"]))
-	print (Fore.CYAN+"TOTAL ASSET VALUE: %d"%(total))
+	print (colored("TOTAL ASSET VALUE: %d"%(total),"magenta"))

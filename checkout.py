@@ -8,6 +8,7 @@ from sqlalchemy.sql import select,text
 import declaredb
 from declaredb import Items,Logs,Base
 import datetime
+from termcolor import colored
 
 def check_out(item_id):
 	#create engine
@@ -51,23 +52,23 @@ def check_out(item_id):
 
 					click.echo(Fore.GREEN+"*********************")		
 					click.echo(Fore.YELLOW+"Item Checked out")
-					click.echo(Fore.GREEN+"*********************")
+					print(colored("*********************","green"))
 
 				else:
 					click.echo(Fore.GREEN+"**********************************************************")
 					click.echo(Fore.RED+"You cannot check out an item has been  checked out")	
-					click.echo(Fore.GREEN+"**********************************************************")
+					print(colored("******************************************************************","green"))
 
 			else:
 				click.echo(Fore.GREEN+"**********************************************************")
 				click.echo(Fore.RED+"No such item in database.")
-				click.echo(Fore.GREEN+"**********************************************************")	
+				print(colored("******************************************************************","green"))
 
 		else:
 			click.echo(Fore.GREEN+"**********************************************************")
-			click.echo(Fore.RED+"Item id has to be a number")
+			print(colored("Item id has to be a number","green"))
 			
 	except ValueError as e:
 		click.echo(Fore.GREEN+"**********************************************************")
-		click.echo(Fore.RED+"Invalid value. Please enter a number")		
+		print(colored("Invalid value. Please enter a number","red"))		
 	

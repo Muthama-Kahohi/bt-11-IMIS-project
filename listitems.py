@@ -10,6 +10,7 @@ init()
 import declaredb
 from declaredb import Items,Logs,Base
 from tabulate import tabulate
+from termcolor import colored
 
 def listitems():
 	#create engine
@@ -34,9 +35,12 @@ def listitems():
 	session.close()
 
 	if len(items_list)>0:
-		print(Fore.GREEN + tabulate(items_list,tablefmt="grid",headers=["item_id","Name","Description","Amount_avail","unit_price","date","status"]))
+		
+		print(colored(tabulate(items_list,tablefmt="grid",headers=["item_id","Name","Description","Amount_avail","unit_price","date","status"]),"green"))
+		print(colored("True == checked in","yellow"))
+		print(colored("True== checked out","yellow"))
 	else:
-		print (Fore.YELLOW+ "Table empty")		
+		print (colored("Table empty"),"red")		
 	
 
 	

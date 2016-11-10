@@ -8,7 +8,7 @@ from sqlalchemy.sql import select,text
 import declaredb
 from declaredb import Items,Logs,Base
 import datetime
-import emoji
+from termcolor import colored
 
 def check_in(item_id):
 	#create engine
@@ -37,14 +37,14 @@ def check_in(item_id):
 					break
 
 			if flag:#Ensures that the item is in the database
-
+					
 				item_status=session.query(Items).get(itemid)	
 
 				#Ensures that an item is checked out before checking in
 				if item_status.status:
 					click.echo(Fore.GREEN+"**********************************************************")
-					click.echo(Fore.RED+"You cannot check in an item has not been previously checked out")	
-					click.echo(Fore.GREEN+"**********************************************************")
+					click.echo(Fore.RED+"You cannot check in an item has been not been checked out")	
+					print(colored("******************************************************************","green"))
 
 				else:
 					item_status.status=1 #Updates status to checked out	
@@ -57,19 +57,22 @@ def check_in(item_id):
 
 					click.echo(Fore.GREEN+"*********************")		
 					click.echo(Fore.YELLOW+"Item Checked in")
+					print(colored("*********************","green"))
 
-					click.echo(Fore.GREEN+"*********************")
+
 			else:
 				click.echo(Fore.GREEN+"**********************************************************")
-				click.echo(Fore.RED+"Item id %d not in database"%(itemid))
-				click.echo(Fore.GREEN+"**********************************************************")		
+				click.echo(Fore.RED+"No such item in database.")
+				print(colored("******************************************************************","green"))
+
 		else:
 			click.echo(Fore.GREEN+"**********************************************************")
-			click.echo(Fore.RED+"Item id has to be a number")
+			print(colored("Item id has to be a number","green"))
+			
 	except ValueError as e:
 		click.echo(Fore.GREEN+"**********************************************************")
-		click.echo(Fore.RED+"Invalid value. Please enter a number")		
-
+		print(colored("Invalid value. Please enter a number","red"))		
+	
 
 					
 		

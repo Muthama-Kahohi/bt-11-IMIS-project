@@ -46,14 +46,17 @@ def additem():
 					#Feedback when successfull
 					print(Fore.GREEN+ "*********************")
 					print(Fore.RED+ "Item successfully added")
-					print(Fore.GREEN+ "*********************")
+					print(colored( "*********************","green"))
 
 				else:
 					print(Fore.GREEN+ "*********************************")
-					print(Fore.RED+ "All items have to be filled")
+					print(colored("All items have to be filled","red"))
+					print(colored("*********************************","green"))
+
 			else:
 				print(Fore.GREEN+ "*********************************")
-				print(Fore.RED+ "Invalid types")
+				print(colored("Invalid types","red"))
+				print(colored("*********************************","green"))
 				
 		except ValueError as e:
 			print(Fore.GREEN+ "****************************************************")
@@ -63,7 +66,7 @@ def additem():
 
 	else:
 		print(Fore.GREEN+ "***********************************")
-		print(Fore.RED+ "Item name cannot be blank")
+		print(colored("Item name cannot be blank","red"))
 
 
 
