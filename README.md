@@ -5,15 +5,15 @@ A CLI app that records, displays, searches and keeps track of assets of an organ
 ##Features
 Features include:
 
-	1.Add item
-	2.Remove item
-	3.List items
-	4.Eport Inventory as a CSV file
-	5.Checkout an item
-	6.Checkin a previously checked out item
-	7.View specific items
-	8.Search item
-	9.Compute assets value
+1. Add item
+2. Remove item
+3. List items
+4. Eport Inventory as a CSV file
+5. Checkout an item
+6. Checkin a previously checked out item
+7. View specific items
+8. Search item
+9. Compute assets value
 
 ##Installation:
 1. git clone [repo](https://github.com/Muthama-Kahohi/bt-11-IMIS-project.git)
@@ -22,6 +22,19 @@ Features include:
 4. Run command to enter `python start_session.py -i`
 5. Follow commands
 
-##Dependencies	
+##Core Dependencies	
+###[docopt](http://docopt.org/)
+Defines interface for command line app and automatically generates parser
+
+###[pyfiglet](https://pypi.python.org/pypi/pyfiglet)
+Defines font for texts appearing on interface
+
+###[colorama](https://pypi.python.org/pypi/colorama)
+Makes ANSI escape character sequences (for producing colored terminal text and cursor positioning) work under MS Windows.
+
+###[tabulate](https://pypi.python.org/pypi/tabulate)
+Represent data in form of tables
+
+
 
 
