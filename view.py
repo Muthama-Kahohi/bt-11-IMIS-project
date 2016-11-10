@@ -7,12 +7,13 @@ from sqlalchemy.sql import select,text
 import declaredb
 from declaredb import Items,Logs,Base
 import datetime
+import click
 from tabulate import tabulate
 from sqlalchemy.sql import select,text
 
 
-def view(itemid):
-	print(Fore.YELLOW+"Display two tables of Item id: %d "%(itemid))
+def view(item_id):
+	print(Fore.YELLOW+"Display two tables of Item id: "+item_id)
 	print(Fore.RED+"****ITEM DETAILS")
 	
 
@@ -25,26 +26,31 @@ def view(itemid):
 	Session = sessionmaker(bind=engine)
 	session = Session()
 
-	item_details=session.query(Items).get(itemid)
-	log_details=select([Logs]).where(Logs.item_id==itemid)
-	result=session.execute(log_details)
+	try:
+		itemid=int(item_id)
+		item_details=session.query(Items).get(itemid)
+		log_details=select([Logs]).where(Logs.item_id==itemid)
+		result=session.execute(log_details)
 
-	log_list=[]
+		log_list=[]
 
-	for log in result.fetchall():
-		log_list.append(log)
+		for log in result.fetchall():
+			log_list.append(log)
 
-	session.close	
+		session.close	
 
 
 
-	item_data=[item_details.id,item_details.itemname,item_details.description,item_details.available_amount,item_details.price,item_details.date_added,item_details.status]
-	details=[item_data]
+		item_data=[item_details.id,item_details.itemname,item_details.description,item_details.available_amount,item_details.price,item_details.date_added,item_details.status]
+		details=[item_data]
 
-	print(Fore.CYAN + tabulate(details,tablefmt="grid",headers=["item_id","Name","Description","Amount_avail","price","date","status"]))
-	print(Fore.GREEN+"******************************************************************************************************************")
-	print(Fore.RED+"****LOG DETAILS")
-	print(Fore.WHITE + tabulate(log_list,tablefmt="grid",headers=["id","item_id","status","Date"]))
+		print(Fore.CYAN + tabulate(details,tablefmt="grid",headers=["item_id","Name","Description","Amount_avail","price","date","status"]))
+		print(Fore.GREEN+"******************************************************************************************************************")
+		print(Fore.RED+"****LOG DETAILS")
+		print(Fore.WHITE + tabulate(log_list,tablefmt="grid",headers=["id","item_id","status","Date"]))
+	except ValueError as e:
+		click.echo(Fore.GREEN+"**********************************************************")
+		click.echo(Fore.RED+"Invalid value. Please enter a number")		
 
 
 

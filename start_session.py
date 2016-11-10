@@ -3,8 +3,6 @@
 This example uses docopt with the built in cmd module to demonstrate an
 interactive command application.
 Usage:
-    imis tcp <host> <port> [--timeout=<seconds>]
-    imis serial <port> [--baud=<n>] [--timeout=<seconds>]
     imis (-i | --interactive)
     imis (-h | --help | --version)
 Options:
@@ -21,6 +19,8 @@ from docopt import docopt, DocoptExit
 from colorama import init,Fore
 init()
 from pyfiglet import Figlet
+
+#import my modules
 from declaredb import Items,Logs,Base
 from additems import additem
 from listitems import listitems
@@ -78,20 +78,20 @@ class ImisInteract (cmd.Cmd):
 
 
     #Adding item details
-    print(Fore.WHITE + "Add Item   :",end=" ")
+    print(Fore.WHITE + "Add Item     :",end=" ")
     print(Fore.GREEN + "add")
 
     #Removing an item
-    print(Fore.WHITE + "Remove Item:",end=" ")
+    print(Fore.WHITE + "Remove Item  :",end=" ")
     print(Fore.GREEN + "remove",end=" ")
     print(Fore.YELLOW + "<item_id>")
 
     #List items
-    print(Fore.WHITE + "List Items :",end=" ")
+    print(Fore.WHITE + "List Items   :",end=" ")
     print(Fore.GREEN + "list")
 
     #Export items
-    print(Fore.WHITE + "Export list:",end=" ")
+    print(Fore.WHITE + "Export list  :",end=" ")
     print(Fore.GREEN + "export",end=" ")
     print(Fore.YELLOW + "<filename>")
 
@@ -101,17 +101,17 @@ class ImisInteract (cmd.Cmd):
     print(Fore.YELLOW + "<item_id>")
 
     #Checkin items
-    print(Fore.WHITE + "Item Checkin:",end=" ")
+    print(Fore.WHITE + "Item Checkin :",end=" ")
     print(Fore.GREEN + "Checkin",end=" ")
     print(Fore.YELLOW + "<item_id>")
 
     #View item
-    print(Fore.WHITE + "View Item:",end=" ")
+    print(Fore.WHITE + "View Item    :",end=" ")
     print(Fore.GREEN + "view",end=" ")
     print(Fore.YELLOW + "<item_id>")
 
     #Search item
-    print(Fore.WHITE + "Search Item:",end=" ")
+    print(Fore.WHITE + "Search Item  :",end=" ")
     print(Fore.GREEN + "search",end=" ")
     print(Fore.YELLOW + "<search_string>")
 
@@ -119,12 +119,12 @@ class ImisInteract (cmd.Cmd):
     print(Fore.WHITE + "Compute asset value:",end=" ")
     print(Fore.GREEN + "assetvalue")
 
-    prompt = '(my_program) '
+    prompt = '(imis) '
     file = None
 
     @docopt_cmd
     def do_add(self,arg):
-        """Usage: add [--timeout=<seconds>]"""
+        """Usage: add """
         additem()
 
     @docopt_cmd
@@ -138,28 +138,28 @@ class ImisInteract (cmd.Cmd):
         """Usage: remove <item_id> [--timeout=<seconds>]
         """
         itemid=arg['<item_id>']
-        remove(int(itemid))  
+        remove(itemid)  
 
     @docopt_cmd
     def do_checkin(self, arg):
         """Usage: checkin <item_id> [--timeout=<seconds>]
         """
         itemid=arg['<item_id>']
-        check_in(int(itemid))
+        check_in(itemid)
 
     @docopt_cmd
     def do_checkout(self, arg):
         """Usage: checkout <item_id> [--timeout=<seconds>]
         """
         itemid=arg['<item_id>']
-        check_out(int(itemid))
+        check_out(itemid)
 
     @docopt_cmd
     def do_view(self, arg):
         """Usage: view <item_id> [--timeout=<seconds>]
         """
         itemid=arg['<item_id>']
-        view(int(itemid)) 
+        view(itemid)
 
     @docopt_cmd
     def do_search(self, arg):
@@ -170,9 +170,7 @@ class ImisInteract (cmd.Cmd):
 
     @docopt_cmd
     def do_export(self, args):
-        """Usage: item_export <file_name>"""
-        print("Export")
-        print(args)
+        """Usage: item_export <file_name>"""               
 
         file_name = args['<file_name>']
 
@@ -186,7 +184,9 @@ class ImisInteract (cmd.Cmd):
         conn.commit()
         c.close()
         conn.close()
-                            
+
+        f = Figlet(font='slant')
+        print(Fore.GREEN + 'File exported, check your directory for the %s file'%(file_name))
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
@@ -196,7 +196,7 @@ class ImisInteract (cmd.Cmd):
         exit()
 
     @docopt_cmd
-    def do_compute(self, arg):
+    def do_assetvalue(self, arg):
         """Usage: list 
         """
         compute()

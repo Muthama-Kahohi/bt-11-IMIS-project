@@ -9,7 +9,7 @@ import declaredb
 from declaredb import Items,Logs,Base
 import datetime
 
-def check_out(itemid):
+def check_out(item_id):
 	#create engine
 	engine = create_engine('sqlite:///inventory.db')
 
@@ -19,22 +19,28 @@ def check_out(itemid):
 	Session = sessionmaker(bind=engine)
 	session = Session()
 
-	item_status=session.query(Items).get(itemid)	
+	try:
+		itemid=int(item_id)
+		item_status=session.query(Items).get(itemid)	
 
-	#Ensures that an item is checked in before checking out
-	if item_status.status:
-		item_status.status=0 #Updates status to checked out	
+		#Ensures that an item is checked in before checking out
+		if item_status.status:
+			item_status.status=0 #Updates status to checked out	
 
-		new_log=Logs(item_id=itemid,status=0,date=datetime.date.today())#updates log table
+			new_log=Logs(item_id=itemid,status=0,date=datetime.date.today())#updates log table
 
-		session.add(new_log)
-		session.commit()
-		session.close()
+			session.add(new_log)
+			session.commit()
+			session.close()
 
-		click.echo(Fore.GREEN+"*********************")		
-		click.echo(Fore.YELLOW+"Tables updated")
-		click.echo(Fore.GREEN+"*********************")
-	else:
-		click.echo(Fore.GREEN+"**********************************************************")
-		click.echo(Fore.RED+"You cannot checkout an item that is already checked out")	
-		click.echo(Fore.GREEN+"**********************************************************")
+			click.echo(Fore.GREEN+"*********************")		
+			click.echo(Fore.YELLOW+"Tables updated")
+			click.echo(Fore.GREEN+"*********************")
+		else:
+			click.echo(Fore.GREEN+"**********************************************************")
+			click.echo(Fore.RED+"You cannot checkout an item that is already checked out")	
+			click.echo(Fore.GREEN+"**********************************************************")
+
+	except ValueError as e:
+		click.echo(Fore.GREEN+"****************************************************88********")
+		click.echo(Fore.RED+"Invalid value. Please enter a number")			
