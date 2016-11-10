@@ -18,29 +18,56 @@ def check_out(item_id):
 
 	Session = sessionmaker(bind=engine)
 	session = Session()
-
 	try:
 		itemid=int(item_id)
-		item_status=session.query(Items).get(itemid)	
 
-		#Ensures that an item is checked in before checking out
-		if item_status.status:
-			item_status.status=0 #Updates status to checked out	
+		if isinstance(itemid,int):
 
-			new_log=Logs(item_id=itemid,status=0,date=datetime.date.today())#updates log table
+			id=session.query(Items.id)
+			id_list=[]
+			flag=False
 
-			session.add(new_log)
-			session.commit()
-			session.close()
+			for index in id:
+				id_list.append(list(index))
 
-			click.echo(Fore.GREEN+"*********************")		
-			click.echo(Fore.YELLOW+"Tables updated")
-			click.echo(Fore.GREEN+"*********************")
+			for index in id_list:
+				if itemid in index:
+					flag=True
+					break
+
+			if flag:#Ensures that the item is in the database
+					
+				item_status=session.query(Items).get(itemid)	
+
+				#Ensures that an item is checked out before checking in
+				if item_status.status:
+					item_status.status=0 #Updates status to checked out	
+
+					new_log=Logs(item_id=itemid,status=0,date=datetime.datetime.now())#updates log table
+
+					session.add(new_log)
+					session.commit()
+					session.close()
+
+					click.echo(Fore.GREEN+"*********************")		
+					click.echo(Fore.YELLOW+"Item Checked out")
+					click.echo(Fore.GREEN+"*********************")
+
+				else:
+					click.echo(Fore.GREEN+"**********************************************************")
+					click.echo(Fore.RED+"You cannot check out an item has been  checked out")	
+					click.echo(Fore.GREEN+"**********************************************************")
+
+			else:
+				click.echo(Fore.GREEN+"**********************************************************")
+				click.echo(Fore.RED+"No such item in database.")
+				click.echo(Fore.GREEN+"**********************************************************")	
+
 		else:
 			click.echo(Fore.GREEN+"**********************************************************")
-			click.echo(Fore.RED+"You cannot checkout an item that is already checked out")	
-			click.echo(Fore.GREEN+"**********************************************************")
-
+			click.echo(Fore.RED+"Item id has to be a number")
+			
 	except ValueError as e:
-		click.echo(Fore.GREEN+"****************************************************88********")
-		click.echo(Fore.RED+"Invalid value. Please enter a number")			
+		click.echo(Fore.GREEN+"**********************************************************")
+		click.echo(Fore.RED+"Invalid value. Please enter a number")		
+	
