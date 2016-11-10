@@ -38,7 +38,7 @@ def listitems():
 		
 		print(colored(tabulate(items_list,tablefmt="grid",headers=["item_id","Name","Description","Amount_avail","unit_price","date","status"]),"green"))
 		print(colored("True == checked in","yellow"))
-		print(colored("True== checked out","yellow"))
+		print(colored("False== checked out","yellow"))
 	else:
 		print (colored("Table empty"),"red")		
 	

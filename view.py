@@ -68,7 +68,7 @@ def view(item_id):
 				print(Fore.RED+"****LOG DETAILS")
 				print(colored(tabulate(log_list,tablefmt="grid",headers=["id","item_id","status","Date"]),"green"))
 				print(colored("True == checked in","yellow"))
-				print(colored("True== checked out","yellow"))
+				print(colored("False== checked out","yellow"))
 
 
 			else:
